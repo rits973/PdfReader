@@ -1,0 +1,5 @@
+@(adhar:List[AdharCardModel])
+<h1>One To One Mapping Result</h1>
+@for(ad<-adhar){
+@ad.adharNo @ad.person.personName @ad.person.age @ad.country @ad.details <br>
+}

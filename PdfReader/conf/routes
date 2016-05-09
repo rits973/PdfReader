@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET   /generateAdhar                controllers.AdharGeneratorController.generateAdhar()
+
+
+
+
+GET /practice    controllers.AdharGeneratorController.practice()
+
+
+#Demo on OneToMany Mapping
+GET   /student                  controllers.StudentController.studentIndex()
+#POST /studentform        controllers.StudentController.addStudent()
+GET  /studen           controllers.StudentController.showStudent()
+
+
+
+#Demo on pdf file reading and writing
+
+GET /pdf    controllers.PdfController.index()
+
+POST /pdfreader  controllers.PdfController.reader()
+
+GET /writepdf   controllers.PdfController.writer()

@@ -1,0 +1,93 @@
+@()
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+
+<h1>Account Information</h1>
+By Name
+<select id="saccnt" data-bind="options:Accounts,optionsText:'Name'"></select><br>
+Total Accounts:<span data-bind="text:Accounts().length"></span>
+<hr/>
+
+<h5>Selected Account Details</h5>
+Id:<span data-bind="text:Accounts()[SelectedAccountIndex()].Id"></span><br>
+Name:<span data-bind="text:Accounts()[SelectedAccountIndex()].Name"></span><br>
+Amount:<span data-bind="text:Accounts()[SelectedAccountIndex()].Amount"></span><br>
+
+
+
+<!-- <input type="button" id="but" value="showDetails"/><br>
+<hr/>
+
+Deposit Amount<input type="text" id="txt" >
+<input type="button" id="bt" value="Deposit"><br>
+<hr/>
+
+
+ Updated Amount<input type="text" data-bind="value:Amount"/>-->
+ 
+ 
+
+<hr/>
+NewId:<input type="text" id="newid" value=""><br>
+NewName:<input type="text" id="newname" value=""><br>
+NewAmount:<input type="text" id="newamount" valueanotherObservableArray=""><br>
+<input type="button" id="but1" value="AddAccount"/><input type="button" id="but2" value="DeleteAccount"/><br>
+<hr/>
+
+
+<script>
+$(document).ready(function(){
+	$("#but").click(function(){
+		alert(accvm.Amount())
+		})
+		$("#bt").click(function(){
+			
+			accvm.Amount(Number(accvm.Amount()+Number($("#txt").val())));
+			})
+			$("#but1").click(function(){
+				var acc1=new accModel($("#newid").val(),$("#newname").val(),$("#newamount").val())
+				accvm.Accounts.push(acc1)
+				
+			})
+			
+			$("#but2").click(function(){
+				accvm.Accounts.pop()
+			
+			})
+			$("#saccnt").change(function(){
+
+				var slaccnt=document.getElementById("saccnt").selectedIndex;
+				accvm.SelectedAccountIndex(slaccnt)
+				
+
+				})
+	
+});
+</script>
+
+
+ 
+
+<script>
+//-----------------------------------------------------------ObservableArray Demo-------------------------------------------
+
+function accModel(id,name,amount){
+	this.Id=id;
+	this.Name=name;
+	this.Amount=amount;
+}
+function accViewModel(acc){
+	this.Id=acc.Id;"hii"
+	this.Name=acc.Name;
+	this.Amount=ko.observable(acc.Amount);
+	var a1=new accModel(124,"gopal",4300);
+	var a2=new accModel(125,"rahul",40005);
+	var a3=new accModel(126,"govind",400300);
+	this.Accounts=ko.observableArray([a1,a2,a3]);
+	this.SelectedAccountIndex=ko.observable(0);
+	
+}
+var acc=new accModel(123,"Ritesh",20000);
+var accvm=new accViewModel(acc);
+ko.applyBindings(accvm);
+</script>
